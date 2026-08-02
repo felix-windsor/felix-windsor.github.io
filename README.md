@@ -9,6 +9,8 @@ my-portfolio/
 ├─ index.html          页面结构（改标题、导航、各段文字）
 ├─ styles.css          样式（改颜色/字体就改最上面的 :root 变量）
 ├─ script.js           交互逻辑（一般不用动）
+├─ projects/           独立项目案例页与共用案例样式
+├─ assets/projects/    案例页和首页卡片使用的项目截图
 ├─ data/
 │  └─ content.js       项目列表和首屏统计数字 ← 改内容主要改这里
 └─ README.md           本说明
@@ -36,6 +38,9 @@ python3 -m http.server 8000
      "category": "agent",        // 对应：agent / data / backend（全栈/后端）/ tool
      "status": "进行中",          // 可留空
      "stack": ["Python", "RAG"], // 项目技术标签
+     "image": "assets/projects/demo.png", // 首页卡片截图，可选
+     "imageAlt": "项目界面说明",            // 截图替代文本
+     "caseStudy": "projects/demo.html",    // 案例详情页，可选
      "demo": "https://...",       // 在线链接，没有就删掉这行
      "code": "https://github.com/..."  // 源码链接，没有就删掉这行
    }

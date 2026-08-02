@@ -13,18 +13,24 @@ window.PORTFOLIO_DATA = {
   projects: [
     {
       title: "ModelGate",
-      description: "面向小型团队的自托管模型网关，提供 Anthropic 兼容接口、供应商诊断、配额管理与可视化控制台。",
+      description: "面向可信主机与小型团队的自托管模型网关，把 Anthropic Messages、OpenAI-compatible Provider、Tool Use、配额与可观测性收束进一条可治理链路。",
       category: "agent",
-      status: "持续开发",
-      stack: ["Rust", "LLM Gateway", "Anthropic API"],
+      status: "本地可运行",
+      stack: ["Rust + Axum", "React", "Protocol Adapter", "PostgreSQL"],
+      image: "assets/projects/modelgate-dashboard.png",
+      imageAlt: "ModelGate 模型网关运行仪表盘",
+      caseStudy: "projects/modelgate.html",
       code: "https://github.com/felix-windsor/ModelGate"
     },
     {
       title: "FlowOps",
-      description: "面向小型公司的现金流运营台，将经营流水、预算承诺、审批、资金账户、票据证据与人力成本连接起来，形成完整的企业经营闭环。",
+      description: "面向小型公司的现金流运营台，把经营流水、预算承诺、审批、资金账户、票据证据与人力成本连接为可追踪的经营闭环。",
       category: "backend",
       status: "全栈项目",
-      stack: ["Next.js", "Spring Boot", "PostgreSQL", "MinIO"],
+      stack: ["Next.js 16", "Spring Boot 4", "PostgreSQL", "MinIO"],
+      image: "assets/projects/flowops-dashboard.png",
+      imageAlt: "FlowOps 企业经营现金流工作台",
+      caseStudy: "projects/flowops.html",
       code: "https://github.com/felix-windsor/Flowops-master"
     },
     {

@@ -44,6 +44,9 @@ onReady();
 assert.match(statsBox.innerHTML, /846K\+/);
 assert.match(projectGrid.innerHTML, /ModelGate/);
 assert.match(projectGrid.innerHTML, /FlowOps/);
+assert.match(projectGrid.innerHTML, /projects\/modelgate\.html/);
+assert.match(projectGrid.innerHTML, /projects\/flowops\.html/);
+assert.match(projectGrid.innerHTML, /案例详情/);
 assert.ok(
   projectGrid.innerHTML.indexOf("ModelGate") < projectGrid.innerHTML.indexOf("FlowOps"),
   "ModelGate 应排在 FlowOps 前面"

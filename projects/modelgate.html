@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ModelGate 案例详情 · Felix Wang</title>
+  <meta name="description" content="ModelGate 自托管模型网关案例：协议适配、确定性路由、Tool Use、配额治理、流式边界与运维控制面。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="case-study.css" />
+</head>
+<body>
+  <header class="case-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html"><span class="brand-mark"></span>Felix Wang</a>
+      <nav class="case-nav" aria-label="案例导航">
+        <a href="#architecture">请求链路</a>
+        <a href="../index.html#projects">← 返回项目</a>
+        <a href="https://github.com/felix-windsor/ModelGate" target="_blank" rel="noopener">GitHub ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="case-hero container">
+      <p class="eyebrow">Infrastructure Case Study · 重点案例</p>
+      <h1>ModelGate</h1>
+      <p class="case-lead">一个面向 Claude Code、VS Code Claude 与 API 客户端的自托管模型网关。它将 Anthropic Messages 请求路由到 Anthropic-compatible 或 OpenAI-compatible Provider，并把协议差异、Tool Use、鉴权、配额、健康状态和观测证据留在业务应用之外。</p>
+      <div class="hero-actions">
+        <a class="button primary" href="https://github.com/felix-windsor/ModelGate" target="_blank" rel="noopener">查看源码</a>
+        <a class="button" href="#architecture">查看请求链路</a>
+      </div>
+      <dl class="facts">
+        <div class="fact"><dt>Client contract</dt><dd>Anthropic Messages</dd></div>
+        <div class="fact"><dt>Data plane</dt><dd>Rust · Axum · Tokio</dd></div>
+        <div class="fact"><dt>Control plane</dt><dd>React · TypeScript</dd></div>
+        <div class="fact"><dt>State</dt><dd>PostgreSQL / JSON</dd></div>
+      </dl>
+    </section>
+
+    <section class="container">
+      <figure class="hero-visual">
+        <img src="../assets/projects/modelgate-dashboard.png" alt="ModelGate 运行仪表盘，展示请求、成本、Token 和成功率" />
+        <figcaption><strong>当前运行仪表盘：</strong>把请求量、Token、成本估算、成功率、延迟与模型使用情况放在同一个运维视图中。截图仍保留代码底座阶段的 ModelPort 品牌，品牌迁移尚未完全收口。</figcaption>
+      </figure>
+    </section>
+
+    <section class="case-section container">
+      <div class="split">
+        <article class="panel">
+          <span class="panel-tag">Problem</span>
+          <h3>模型越多，业务越不应该理解 Provider 方言</h3>
+          <p>Provider 的模型名、鉴权头、Tool Use、SSE 事件、失败语义与 usage 口径各不相同。每个应用自己适配，会让路由、成本控制与排障证据分散到业务代码。</p>
+        </article>
+        <article class="panel">
+          <span class="panel-tag">Approach</span>
+          <h3>把一次转发变成有边界的治理管线</h3>
+          <p>以 Anthropic Messages 为客户端契约，在服务端依次完成身份、策略、模型解析、Provider 尝试、协议映射和观测记录；不把“HTTP 200”误当作流式请求已经成功。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="case-section container">
+      <div class="section-heading">
+        <span class="section-label">Current Product</span>
+        <h2>控制面不只是漂亮的 Dashboard</h2>
+        <p>界面用于操作同一套后端事实源：API Key、用户、配额、模型目录、Provider、请求日志、健康与配置诊断都落回网关控制面，而不是在前端维护第二套路由真相。</p>
+      </div>
+      <div class="gallery">
+        <figure>
+          <img src="../assets/projects/modelgate-models.png" alt="ModelGate 模型与 Provider 管理界面" loading="lazy" />
+          <figcaption><strong>模型与 Provider：</strong>管理模型目录、别名、默认路由、能力与 Provider 运行状态。</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/projects/modelgate-dashboard.png" alt="ModelGate 指标与日志仪表盘" loading="lazy" />
+          <figcaption><strong>指标与日志：</strong>用请求 ID、usage 来源、费用估算与健康状态支持排障。</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="case-section container">
+      <div class="section-heading">
+        <span class="section-label">Shipped System</span>
+        <h2>已经落在仓库里的六个工程面</h2>
+      </div>
+      <div class="number-grid">
+        <article class="number-card"><span class="num">01</span><h3>协议边界</h3><p>对外提供 <code>POST /v1/messages</code> 与模型目录；Anthropic 可直通，OpenAI Chat 经过聚焦的请求、响应和 SSE 转换。</p></article>
+        <article class="number-card"><span class="num">02</span><h3>Tool Use 转换</h3><p>覆盖常见 Tool Call 和增量参数事件，并对帧大小、流大小、完成信号与重放去重设置明确限制。</p></article>
+        <article class="number-card"><span class="num">03</span><h3>确定性路由</h3><p>按 <code>provider:model</code>、递归别名、精确模型、前缀与默认 Provider 解析，仅在可重试失败上有边界降级。</p></article>
+        <article class="number-card"><span class="num">04</span><h3>身份与额度</h3><p>API Key 绑定真实用户，叠加模型、Provider、IP、用户配额和滚动费用窗口；只有真正发出的上游尝试才计量。</p></article>
+        <article class="number-card"><span class="num">05</span><h3>防御式流处理</h3><p>禁止重定向，约束 body、SSE、超时与并发；stream permit 持有到响应体完成或释放。</p></article>
+        <article class="number-card"><span class="num">06</span><h3>可运维交付</h3><p>提供 React 控制台、配置检查、Provider doctor、Prometheus、备份恢复、Docker Compose 与 systemd 模板。</p></article>
+      </div>
+    </section>
+
+    <section class="case-section container" id="architecture">
+      <div class="section-heading">
+        <span class="section-label">Request Lifecycle</span>
+        <h2>一次请求如何穿过网关</h2>
+      </div>
+      <div class="flow">
+        <article class="flow-step"><span>01</span><h3>Client Edge</h3><p>接收 Anthropic Messages，分配 request ID，限制 body 并校验 <code>max_tokens</code>。</p></article>
+        <article class="flow-step"><span>02</span><h3>Identity & Policy</h3><p>鉴权 API Key，检查用户状态、IP、模型、Provider、配额与费用窗口。</p></article>
+        <article class="flow-step"><span>03</span><h3>Route Plan</h3><p>解析别名和模型，选择凭证池，跳过冷却 Provider 并生成有界尝试计划。</p></article>
+        <article class="flow-step"><span>04</span><h3>Protocol Adapter</h3><p>直通 Anthropic，或映射 OpenAI Chat、Tool Use 与 SSE 增量事件。</p></article>
+        <article class="flow-step"><span>05</span><h3>Evidence</h3><p>记录响应、usage 来源、费用估算、Provider 结果、健康与 Prometheus 指标。</p></article>
+      </div>
+    </section>
+
+    <section class="container">
+      <figure class="hero-visual">
+        <img src="../assets/projects/modelgate-lifecycle.png" alt="ModelGate 请求生命周期架构图" loading="lazy" />
+        <figcaption><strong>工程视角：</strong>客户端、治理策略、路由、协议转换、Provider 池与观测证据组成一条可解释链路。</figcaption>
+      </figure>
+    </section>
+
+    <section class="case-section container">
+      <div class="section-heading">
+        <span class="section-label">Engineering Decisions</span>
+        <h2>比“能转发”更重要的取舍</h2>
+      </div>
+      <div class="decision-list">
+        <article class="decision"><span>1</span><div><h3>Fallback 只解决可重试故障，不承诺模型语义等价</h3><p>仅对 transport、protocol、429 与 5xx 等失败尝试下一条可接收模型的路径；流式响应头发出后不跨 Provider 重放。</p></div></article>
+        <article class="decision"><span>2</span><div><h3>preflight 拒绝不计量</h3><p>身份、策略、额度、能力和凭证检查发生在出站前；只有确实发送给 Provider 的尝试才进入配额与费用记录。</p></div></article>
+        <article class="decision"><span>3</span><div><h3>区分上游 usage 与本地估算</h3><p><code>upstream-returned</code> 和 <code>local-estimate</code> 保留证据来源；本地价格表用于运维判断，但不冒充 Provider 最终账单。</p></div></article>
+      </div>
+    </section>
+
+    <section class="case-section container">
+      <div class="evidence">
+        <div><span class="section-label">Reproducible Evidence</span><h2>交付物包含可重复的验收路径</h2><p>仓库提供本地无费用检查、控制面验收、Tool Use mock 链路和完整检查脚本。真实上游验证可能产生费用，因此单独放在 Provider 兼容矩阵中记录。</p></div>
+        <pre>model-gate config inspect
+model-gate providers doctor
+scripts/config-validate.sh
+scripts/smoke-test.sh
+scripts/tool-use-acceptance.sh
+scripts/check-all.sh</pre>
+      </div>
+    </section>
+
+    <section class="case-section container">
+      <div class="boundary-grid">
+        <article class="boundary good"><span class="state">Current Fit</span><h3>当前适合</h3><ul><li>可信主机或小型可信网络里的统一模型入口。</li><li>同时连接 Anthropic 与 OpenAI-compatible Provider。</li><li>需要集中管理 Key、路由、配额、日志和健康状态的小团队。</li></ul></article>
+        <article class="boundary caution"><span class="state">Honest Boundaries</span><h3>仍需明确</h3><ul><li>不是可直接暴露公网的成熟多租户 SaaS。</li><li>配额检查是 preflight guard，不是分布式事务式预留。</li><li>session、限流与 stream permit 仍是进程内状态。</li><li>现有截图品牌仍在从 ModelPort 向 ModelGate 迁移。</li></ul></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="case-footer"><div class="container"><span>© 2026 王涵宇 Felix · ModelGate Case Study</span><a href="flowops.html">下一个案例：FlowOps →</a></div></footer>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlowOps 案例详情 · Felix Wang</title>
+  <meta name="description" content="FlowOps 现金流运营台案例：经营流水、预算承诺、审批、票据证据、资金账户与人力成本。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="case-study.css" />
+</head>
+<body>
+  <header class="case-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html"><span class="brand-mark"></span>Felix Wang</a>
+      <nav class="case-nav" aria-label="案例导航">
+        <a href="#lifecycle">经营链路</a>
+        <a href="../index.html#projects">← 返回项目</a>
+        <a href="https://github.com/felix-windsor/Flowops-master" target="_blank" rel="noopener">GitHub ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="case-hero container">
+      <p class="eyebrow">Full-stack Product Case · 重点案例</p>
+      <h1>FlowOps</h1>
+      <p class="case-lead">一个面向小型公司的现金流运营台。它不把“记账”当终点，而是把经营流水、预算承诺、审批、付款、票据证据、资金账户与人力成本连接起来，让管理者更早看见现金压力与下一步动作。</p>
+      <div class="hero-actions">
+        <a class="button primary" href="https://github.com/felix-windsor/Flowops-master" target="_blank" rel="noopener">查看源码</a>
+        <a class="button" href="#lifecycle">查看经营闭环</a>
+      </div>
+      <dl class="facts">
+        <div class="fact"><dt>Frontend</dt><dd>Next.js 16 · React 19</dd></div>
+        <div class="fact"><dt>Backend</dt><dd>Spring Boot 4 · Java 21</dd></div>
+        <div class="fact"><dt>Data &amp; Files</dt><dd>PostgreSQL · MinIO</dd></div>
+        <div class="fact"><dt>Operations</dt><dd>Caddy · Prometheus</dd></div>
+      </dl>
+    </section>
+
+    <section class="container">
+      <figure class="hero-visual">
+        <img src="../assets/projects/flowops-dashboard.png" alt="FlowOps 企业经营工作台，展示收入、成本、预算风险与优先动作" />
+        <figcaption><strong>经营工作台：</strong>把收入、成本、净额、预算使用率、票据风险、资金对账与优先动作聚合到一个管理视图。当前截图仍使用底座阶段的 Mamoji 品牌，FlowOps 产品化迁移尚在收口。</figcaption>
+      </figure>
+    </section>
+
+    <section class="case-section container">
+      <div class="split">
+        <article class="panel"><span class="panel-tag">Problem</span><h3>利润为正，也可能先死于现金流</h3><p>订单、回款、预算承诺、审批和实际付款发生在不同时间。只记录已经发生的流水，会错过未来固定支出、待审批付款、票据缺口与账户对账异常。</p></article>
+        <article class="panel"><span class="panel-tag">Approach</span><h3>围绕经营动作组织数据，而不是堆 ERP 菜单</h3><p>用公司上下文与角色权限收拢数据范围，再将预算、审批、付款、证据、周期事项和人力成本串成可追踪链路；首页由后端聚合读模型回答“现在是否健康”。</p></article>
+      </div>
+    </section>
+
+    <section class="case-section container">
+      <div class="section-heading"><span class="section-label">Current Product</span><h2>从经营判断下钻到证据与成本</h2><p>截图来自当前本地版本。它们展示已经完成的信息架构与业务视图，但品牌文字仍是旧底座名称；案例不把这部分包装成已经完成。</p></div>
+      <div class="gallery">
+        <figure class="wide"><img src="../assets/projects/flowops-dashboard.png" alt="FlowOps 经营指挥台" loading="lazy" /><figcaption><strong>经营指挥台：</strong>聚合现金指标、经营健康分、风险清单与今日优先动作。</figcaption></figure>
+        <figure><img src="../assets/projects/flowops-receipts.png" alt="FlowOps 票据与报销中心" loading="lazy" /><figcaption><strong>票据证据链：</strong>发票、报销单、银行回单与合同付款统一归档，并暴露核验、附件和关联缺口。</figcaption></figure>
+        <figure><img src="../assets/projects/flowops-compensation.png" alt="FlowOps 人力成本工作台" loading="lazy" /><figcaption><strong>人力成本：</strong>把薪酬、公司承担成本和部门预算视为现金压力，而不是独立 HR 报表。</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="case-section container">
+      <div class="section-heading"><span class="section-label">Shipped System</span><h2>产品主线覆盖六类真实经营能力</h2></div>
+      <div class="number-grid">
+        <article class="number-card"><span class="num">01</span><h3>经营聚合读模型</h3><p><code>/api/v1/workspace</code> 统一计算收入、成本、可用现金、预算风险、待审批、票据问题、周期事项与优先动作。</p></article>
+        <article class="number-card"><span class="num">02</span><h3>预算风险策略</h3><p>按使用率计算健康、偏高、接近上限与超支等级；数据更新使用版本字段和乐观锁避免静默覆盖。</p></article>
+        <article class="number-card"><span class="num">03</span><h3>审批与证据</h3><p>审批请求、经营流水与票据凭证能够关联；付款后的发票、合同、回单与核验状态形成审计线索。</p></article>
+        <article class="number-card"><span class="num">04</span><h3>公司级访问边界</h3><p>公司成员、ActorContext、角色权限、模块开关和数据范围共同决定接口可见性；关键查询显式带 company scope。</p></article>
+        <article class="number-card"><span class="num">05</span><h3>Outbox 通知</h3><p>业务动作先写 <code>outbox_events</code>，本地消费者生成站内通知或 Webhook，失败指数退避并最终进入 dead 状态。</p></article>
+        <article class="number-card"><span class="num">06</span><h3>生产运行基线</h3><p>Flyway、PostgreSQL、MinIO 私有 bucket、Caddy、Prometheus、生产启动 guard、版本锁定与运行手册构成交付边界。</p></article>
+      </div>
+    </section>
+
+    <section class="case-section container" id="lifecycle">
+      <div class="section-heading"><span class="section-label">Operating Lifecycle</span><h2>从支出意图到可解释的经营结果</h2></div>
+      <div class="flow">
+        <article class="flow-step"><span>01</span><h3>经营事项</h3><p>项目、订阅、工资或采购形成收入预期与支出意图。</p></article>
+        <article class="flow-step"><span>02</span><h3>预算承诺</h3><p>支出在付款前进入预算视图，系统提前暴露占用与超支风险。</p></article>
+        <article class="flow-step"><span>03</span><h3>审批付款</h3><p>申请、通过、驳回与付款记录保留公司、角色和动作边界。</p></article>
+        <article class="flow-step"><span>04</span><h3>票据证据</h3><p>合同、发票、报销单与银行回单关联到对应经营记录。</p></article>
+        <article class="flow-step"><span>05</span><h3>经营判断</h3><p>工作台更新现金、预算、对账、证据与固定成本风险。</p></article>
+      </div>
+    </section>
+
+    <section class="case-section container">
+      <div class="section-heading"><span class="section-label">Engineering Decisions</span><h2>三个让系统更像产品而不是 CRUD 的决定</h2></div>
+      <div class="decision-list">
+        <article class="decision"><span>1</span><div><h3>后端负责经营快照，前端不拼十几个接口</h3><p>Workspace application service 统一读取经营、资金、证据、审批与周期事项，再按访问范围输出可行动的聚合视图。</p></div></article>
+        <article class="decision"><span>2</span><div><h3>预算管理发生在付款之前</h3><p>预算风险不是月底报表，而是审批与支出承诺阶段的前置反馈；超支、接近阈值与并发修改都进入明确业务状态。</p></div></article>
+        <article class="decision"><span>3</span><div><h3>先用数据库 Outbox 保证业务落库，再保留 MQ 演进点</h3><p>当前规模不强行引入 RocketMQ；业务侧只依赖 <code>OutboxEventService.publish(...)</code>，未来可替换 handler 而不侵入领域动作。</p></div></article>
+      </div>
+    </section>
+
+    <section class="case-section container">
+      <div class="evidence">
+        <div><span class="section-label">Reproducible Delivery</span><h2>从五分钟启动到生产检查</h2><p>项目提供 Docker Compose 本地环境、独立前后端开发路径、Flyway schema、后端测试、前端构建以及生产 Runbook / Go-live Checklist。</p></div>
+        <pre>docker compose up -d --build
+mvn -f backend/pom.xml test
+cd frontend && npm ci && npm run build
+curl http://localhost:38080/actuator/health
+scripts/deploy-prod.sh</pre>
+      </div>
+    </section>
+
+    <section class="case-section container">
+      <div class="boundary-grid">
+        <article class="boundary good"><span class="state">Current Fit</span><h3>当前适合</h3><ul><li>需要把现金、预算、审批和票据放在一起看的小团队。</li><li>希望用公司、角色和数据范围管理经营信息。</li><li>需要本地可运行、可演示、可继续产品化的全栈底座。</li></ul></article>
+        <article class="boundary caution"><span class="state">Honest Boundaries</span><h3>仍在收口</h3><ul><li>不是会计、税务或银行系统的替代品。</li><li>部分扩展模块仍来自更宽的企业经营底座，默认按产品模式关闭。</li><li>截图中的 Mamoji 品牌尚未全部替换为 FlowOps。</li><li>生产配置、密钥、域名与对象存储策略仍需部署者显式完成。</li></ul></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="case-footer"><div class="container"><span>© 2026 王涵宇 Felix · FlowOps Case Study</span><a href="modelgate.html">← 上一个案例：ModelGate</a></div></footer>
+</body>
+</html>

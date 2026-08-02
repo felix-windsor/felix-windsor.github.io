@@ -285,9 +285,31 @@ code {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
-  padding: 24px;
+  overflow: hidden;
   transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
+.card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 24px;
+}
+.card-visual {
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: #eceff5;
+}
+.card-visual img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: top left;
+  transition: transform 600ms var(--ease);
+}
+.card:hover .card-visual img { transform: scale(1.025); }
 .card:hover {
   transform: translateY(-4px);
   border-color: rgba(232, 178, 95, 0.45);
@@ -338,6 +360,7 @@ code {
   transition: color var(--dur) var(--ease);
 }
 .card-links a:hover { color: var(--accent-hi); }
+.card-links .case-link { color: var(--accent-hi); }
 
 .card.is-hidden { display: none; }
 

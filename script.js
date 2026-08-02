@@ -39,17 +39,25 @@ function renderProjects() {
     if (!Array.isArray(projects)) throw new Error("缺少 projects 数据");
     grid.innerHTML = projects
       .map((p) => {
-        // 拼接项目上的链接（可能有 demo、也可能有 code，没有就不显示）
+        // 拼接项目上的链接（案例、demo、code 均按需显示）
         const links = [];
+        if (p.caseStudy) links.push(`<a class="case-link" href="${p.caseStudy}">案例详情 →</a>`);
         if (p.demo) links.push(`<a href="${p.demo}" target="_blank" rel="noopener">在线预览 →</a>`);
         if (p.code) links.push(`<a href="${p.code}" target="_blank" rel="noopener">源码 →</a>`);
         const stack = Array.isArray(p.stack)
           ? `<ul class="card-stack">${p.stack.map((item) => `<li>${item}</li>`).join("")}</ul>`
           : "";
+        const visual = p.image
+          ? `<a class="card-visual" href="${p.caseStudy || p.code || "#"}"${p.caseStudy ? "" : ' target="_blank" rel="noopener"'}>
+              <img src="${p.image}" alt="${p.imageAlt || p.title}" loading="lazy" />
+            </a>`
+          : "";
 
         // data-category 给筛选功能用
         return `
           <article class="card" data-category="${p.category}">
+            ${visual}
+            <div class="card-body">
             <div class="card-top">
               <span class="card-cat">${p.category}</span>
               <span class="card-status">${p.status || ""}</span>
@@ -58,6 +66,7 @@ function renderProjects() {
             <p>${p.description}</p>
             ${stack}
             <div class="card-links">${links.join("")}</div>
+            </div>
           </article>`;
       })
       .join("");
