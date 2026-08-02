@@ -8,7 +8,7 @@ window.PORTFOLIO_DATA = {
     { num: "846K+", label: "CSDN 总访问量" },
     { num: "8.6K+", label: "CSDN 粉丝" },
     { num: "3.2K+", label: "公众号关注" },
-    { num: "6", label: "核心奖项" }
+    { num: "5", label: "核心奖项" }
   ],
   projects: [
     {
