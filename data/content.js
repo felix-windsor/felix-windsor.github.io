@@ -8,7 +8,7 @@ window.PORTFOLIO_DATA = {
     { num: "846K+", label: "CSDN 总访问量" },
     { num: "8.6K+", label: "CSDN 粉丝" },
     { num: "3.2K+", label: "公众号关注" },
-    { num: "5", label: "核心奖项" }
+    { num: "6", label: "Merged PRs" }
   ],
   projects: [
     {
@@ -35,10 +35,13 @@ window.PORTFOLIO_DATA = {
     },
     {
       title: "Multi-Model Knowledge RAG System",
-      description: "面向多模型知识检索场景构建的 RAG 系统，探索文档处理、语义检索与大模型回答之间的完整链路。",
+      description: "面向强合规与长期知识资产场景的企业文档 Graph RAG，把多格式解析、closed schema 抽取、置信度治理、向量/图谱存储与可复现评测连接起来。",
       category: "agent",
-      status: "开源项目",
-      stack: ["Python", "RAG", "Vector Search"],
+      status: "本地可运行",
+      stack: ["FastAPI", "LightRAG", "Qdrant + Neo4j", "Graph RAG"],
+      image: "assets/projects/knowledge-rag-dashboard.png",
+      imageAlt: "Multi-Model Knowledge RAG 企业文档工作台",
+      caseStudy: "projects/knowledge-rag.html",
       code: "https://github.com/felix-windsor/Multi-Model-Knowledge-RAG-System"
     },
     {
@@ -51,10 +54,13 @@ window.PORTFOLIO_DATA = {
     },
     {
       title: "Procurement Pricing MCP",
-      description: "采购报价对比 MCP 服务，覆盖文档解析、模拟市场定价、异常检测与 Telegram / Hermes 集成。",
+      description: "面向采购询比价与注塑件核价的 Hermes MCP，把不可信文件、BOM 人工批准、固定行情快照、Decimal 核价、异常检测和 Excel 报告锁进受控状态链。",
       category: "data",
-      status: "开源项目",
-      stack: ["Python", "MCP", "Document Parsing"],
+      status: "可复现 MVP",
+      stack: ["Python", "MCP", "Pydantic", "SQLite + Excel"],
+      image: "assets/projects/procurement-workflow.svg",
+      imageAlt: "Procurement Pricing MCP 采购核价状态链",
+      caseStudy: "projects/procurement-pricing.html",
       code: "https://github.com/felix-windsor/hermes-procurement-pricing-mcp"
     },
     {

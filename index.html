@@ -23,6 +23,7 @@
       </a>
       <nav class="nav" id="nav">
         <a href="#projects" data-nav="projects">项目</a>
+        <a href="#opensource" data-nav="opensource">开源</a>
         <a href="#writing" data-nav="writing">写作</a>
         <a href="#awards" data-nav="awards">荣誉</a>
         <a href="#about" data-nav="about">关于</a>
@@ -70,6 +71,90 @@
         <button class="filter" data-filter="tool">效率工具</button>
       </div>
       <div class="project-grid" data-project-grid></div>
+    </section>
+
+    <section class="section container" id="opensource">
+      <div class="section-head section-head-split">
+        <div>
+          <p class="section-kicker">Open Source</p>
+          <h2>开源贡献</h2>
+          <p class="opensource-intro">
+            持续参与 AI Agent、开发者工具与桌面应用生态，为 ByteDance DeerFlow、Cherry Studio、
+            MoonDownloader、Browser Use 等项目贡献功能与可靠性改进。已有 6 项外部贡献被上游合并，
+            涉及 MCP 工具命名空间、异步文件 I/O、Excel 导出和并发下载隔离。
+          </p>
+        </div>
+        <a class="text-link" href="https://github.com/pulls?q=is%3Apr+author%3Afelix-windsor+is%3Amerged" target="_blank" rel="noopener">查看全部已合并 PR →</a>
+      </div>
+
+      <article class="opensource-featured">
+        <div class="opensource-project-head">
+          <div>
+            <span class="opensource-org">ByteDance</span>
+            <h3>DeerFlow</h3>
+          </div>
+          <span class="merged-badge"><span aria-hidden="true">✓</span> 3 PRs Merged</span>
+        </div>
+        <p class="opensource-summary">持续参与 AI Agent 基础设施建设，覆盖功能设计、运行时可靠性与开发者文档。</p>
+        <ul class="contribution-list">
+          <li>
+            <a href="https://github.com/bytedance/deer-flow/pull/4624" target="_blank" rel="noopener">
+              <span><strong>MCP 工具命名空间</strong>为工具名增加 Server 前缀，减少多服务工具重名风险。</span>
+              <span class="pr-number">#4624 ↗</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/bytedance/deer-flow/pull/4633" target="_blank" rel="noopener">
+              <span><strong>异步附件文件 I/O</strong>将文件读写移出异步事件循环，降低阻塞风险。</span>
+              <span class="pr-number">#4633 ↗</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/bytedance/deer-flow/pull/4632" target="_blank" rel="noopener">
+              <span><strong>上传上下文文档</strong>补全上传文件如何进入上下文的使用说明。</span>
+              <span class="pr-number">#4632 ↗</span>
+            </a>
+          </li>
+        </ul>
+      </article>
+
+      <div class="opensource-grid">
+        <a class="opensource-card" href="https://github.com/CherryHQ/cherry-studio/pull/12656" target="_blank" rel="noopener">
+          <div class="opensource-card-top">
+            <span class="opensource-org">CherryHQ</span>
+            <span class="merged-badge compact"><span aria-hidden="true">✓</span> Merged</span>
+          </div>
+          <h3>Cherry Studio</h3>
+          <p>为 Markdown 表格增加 Excel 导出能力，连接内容生成与办公工作流。</p>
+          <span class="pr-number">PR #12656 ↗</span>
+        </a>
+        <a class="opensource-card" href="https://github.com/LeyckerS/moondownloader/pull/119" target="_blank" rel="noopener">
+          <div class="opensource-card-top">
+            <span class="opensource-org">LeyckerS</span>
+            <span class="merged-badge compact"><span aria-hidden="true">✓</span> Merged</span>
+          </div>
+          <h3>MoonDownloader</h3>
+          <p>隔离同名文件的并发下载路径，避免任务之间相互覆盖。</p>
+          <span class="pr-number">PR #119 ↗</span>
+        </a>
+        <a class="opensource-card" href="https://github.com/browser-use/browser-use/pull/4856" target="_blank" rel="noopener">
+          <div class="opensource-card-top">
+            <span class="opensource-org">browser-use</span>
+            <span class="merged-badge compact"><span aria-hidden="true">✓</span> Merged</span>
+          </div>
+          <h3>Browser Use</h3>
+          <p>修正集成文档中的示例位置说明，降低接入理解成本。</p>
+          <span class="pr-number">PR #4856 ↗</span>
+        </a>
+      </div>
+
+      <details class="review-details">
+        <summary>Currently in review <span>查看正在审查的贡献</span></summary>
+        <div class="review-body">
+          <p>我也在持续参与 CI 验证、代码审查和维护者反馈迭代。</p>
+          <a class="text-link" href="https://github.com/pulls?q=is%3Apr+author%3Afelix-windsor+is%3Aopen" target="_blank" rel="noopener">查看仍开放的 PR →</a>
+        </div>
+      </details>
     </section>
 
     <section class="section container" id="writing">

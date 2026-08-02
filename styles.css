@@ -364,7 +364,126 @@ code {
 
 .card.is-hidden { display: none; }
 
-/* ---------- 8. 写作 / 荣誉 / 关于 / 联系 / 页脚 ---------- */
+/* ---------- 8. 开源贡献 ---------- */
+.opensource-intro { max-width: 760px; }
+.opensource-featured {
+  padding: 34px 36px;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(232, 178, 95, 0.17), transparent 32%),
+    linear-gradient(135deg, var(--surface-2), var(--surface));
+  border: 1px solid rgba(232, 178, 95, 0.35);
+  border-radius: var(--r-lg);
+}
+.opensource-project-head,
+.opensource-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+.opensource-org {
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.opensource-featured h3 {
+  margin-top: 4px;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+.merged-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  padding: 6px 11px;
+  color: #9de2ad;
+  background: rgba(66, 160, 92, 0.12);
+  border: 1px solid rgba(92, 190, 118, 0.25);
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+.merged-badge.compact { padding: 4px 8px; font-size: 0.68rem; }
+.opensource-summary {
+  max-width: 700px;
+  margin: 16px 0 24px;
+  color: var(--muted);
+}
+.contribution-list { list-style: none; border-top: 1px solid var(--border); }
+.contribution-list li { border-bottom: 1px solid var(--border); }
+.contribution-list a {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 17px 0;
+  color: var(--muted);
+  transition: color var(--dur) var(--ease), padding var(--dur) var(--ease);
+}
+.contribution-list a:hover { color: var(--text); padding-left: 6px; }
+.contribution-list strong { color: var(--text); margin-right: 10px; }
+.pr-number {
+  flex: 0 0 auto;
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.opensource-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+.opensource-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 250px;
+  padding: 26px;
+  background: rgba(30, 26, 18, 0.78);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.opensource-card:hover { transform: translateY(-3px); border-color: rgba(232, 178, 95, 0.5); }
+.opensource-card h3 { margin: 22px 0 10px; font-size: 1.16rem; }
+.opensource-card p { color: var(--muted); font-size: 0.92rem; flex-grow: 1; }
+.opensource-card > .pr-number { margin-top: 22px; }
+.review-details {
+  margin-top: 18px;
+  background: rgba(30, 26, 18, 0.5);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+}
+.review-details summary {
+  padding: 18px 22px;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 600;
+  cursor: pointer;
+}
+.review-details summary span {
+  margin-left: 10px;
+  color: var(--faint);
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  font-weight: 400;
+}
+.review-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 22px 20px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ---------- 9. 写作 / 荣誉 / 关于 / 联系 / 页脚 ---------- */
 .blog-home-card {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -536,7 +655,7 @@ code {
 }
 .site-footer a:hover { color: var(--text); }
 
-/* ---------- 9. 载入动画 + 响应式 ---------- */
+/* ---------- 10. 载入动画 + 响应式 ---------- */
 @keyframes rise {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -550,6 +669,8 @@ code {
 
 @media (max-width: 900px) {
   .project-grid { grid-template-columns: repeat(2, 1fr); }
+  .opensource-grid { grid-template-columns: 1fr; }
+  .opensource-card { min-height: 210px; }
   .about-layout { grid-template-columns: 1fr; gap: 16px; }
   .about-heading { position: static; }
 }
@@ -577,6 +698,12 @@ code {
   .selected-writing-head { display: block; }
   .selected-writing-head p { margin-top: 8px; }
   .impact-card { min-height: 190px; }
+  .opensource-featured { padding: 28px; }
+  .opensource-project-head { align-items: flex-start; }
+  .contribution-list a { display: block; }
+  .contribution-list .pr-number { display: block; margin-top: 7px; }
+  .review-details summary span { display: block; margin: 3px 0 0 20px; }
+  .review-body { align-items: flex-start; flex-direction: column; }
   .section-head-split { display: block; }
   .section-head-split > .text-link { display: inline-block; margin-top: 18px; }
   .timeline li { grid-template-columns: 1fr; gap: 7px; padding-left: 22px; }
