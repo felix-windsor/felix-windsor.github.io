@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>王涵宇 Felix · AI 应用与全栈工程</title>
+  <meta name="description" content="王涵宇（Felix）的个人作品集：以完整的前后端工程能力，将 AI、数据与业务需求落地为可靠、可用的产品。" />
+  <meta name="color-scheme" content="dark" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="返回首页">
+        <span class="brand-dot"></span>
+        Felix Wang
+      </a>
+      <nav class="nav" id="nav">
+        <a href="#projects" data-nav="projects">项目</a>
+        <a href="#writing" data-nav="writing">写作</a>
+        <a href="#awards" data-nav="awards">荣誉</a>
+        <a href="#about" data-nav="about">关于</a>
+        <a href="#contact" data-nav="contact">联系</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="打开菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <p class="eyebrow">AI Engineering · Full-Stack Development</p>
+      <h1 class="hero-title">
+        你好，我是<span class="accent">王涵宇 Felix</span>。<br />
+        用完整的工程能力，把 AI 做成真正可用的产品。
+      </h1>
+      <p class="hero-sub">
+        我具备从前端交互、后端服务到数据处理与模型集成的完整开发能力，关注企业 AI 应用的工程落地。
+        Agent、RAG 与 MCP 是我的重点实践方向，但我的目标始终是解决真实问题并交付能够稳定运行的系统。
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projects">查看项目</a>
+        <a class="btn btn-ghost" href="https://github.com/felix-windsor" target="_blank" rel="noopener">GitHub</a>
+        <a class="text-link" href="#writing">阅读我的文章 →</a>
+      </div>
+      <ul class="stats" data-profile-stats></ul>
+    </section>
+
+    <section class="section container" id="projects">
+      <div class="section-head section-head-split">
+        <div>
+          <p class="section-kicker">Selected Work</p>
+          <h2>项目与工程实践</h2>
+          <p>覆盖 AI 应用、数据处理、前后端系统与效率工具，持续把想法推进为可运行、可验证的产品。</p>
+        </div>
+        <a class="text-link" href="https://github.com/felix-windsor?tab=repositories" target="_blank" rel="noopener">查看全部仓库 →</a>
+      </div>
+      <div class="filters" id="filters">
+        <button class="filter is-active" data-filter="all">全部</button>
+        <button class="filter" data-filter="agent">Agent / RAG</button>
+        <button class="filter" data-filter="data">数据 / MCP</button>
+        <button class="filter" data-filter="backend">全栈 / 后端</button>
+        <button class="filter" data-filter="tool">效率工具</button>
+      </div>
+      <div class="project-grid" data-project-grid></div>
+    </section>
+
+    <section class="section container" id="writing">
+      <div class="section-head">
+        <p class="section-kicker">Writing & Community</p>
+        <h2>长期写作，也把复杂技术讲清楚</h2>
+        <p>技术写作不是项目之外的附属品，而是我理解问题、沉淀方法和连接社区的方式。</p>
+      </div>
+      <a class="blog-home-card" href="https://shengxi.xyz" target="_blank" rel="noopener">
+        <div>
+          <span class="impact-label">Personal Blog</span>
+          <h3>盛溪的博客</h3>
+          <p>我的长期写作与思考空间，记录 AI、软件工程、阅读笔记与生活观察。</p>
+        </div>
+        <div class="blog-home-meta">
+          <strong>117</strong>
+          <span>篇文章</span>
+          <span class="text-link">访问博客 →</span>
+        </div>
+      </a>
+
+      <div class="selected-writing">
+        <div class="selected-writing-head">
+          <h3>精选文章</h3>
+          <p>从技术实现到工程判断，四篇文章了解我如何思考和表达。</p>
+        </div>
+        <div class="article-grid">
+          <a class="article-card" href="https://shengxi.xyz/article/Agent-%E5%90%8E%E7%AB%AF%E5%8D%8F%E4%BD%9C%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F" target="_blank" rel="noopener">
+            <div class="article-meta"><span>Agent Architecture</span><time>2026.07</time></div>
+            <h3>Agent-后端协作的三种模式</h3>
+            <p>梳理 Agent 与业务后端之间的职责边界、协作方式与工程取舍。</p>
+            <span class="text-link">阅读全文 →</span>
+          </a>
+          <a class="article-card" href="https://shengxi.xyz/article/%E7%94%A8%20LLM%20%E5%81%9A%E9%95%BF%E7%A8%8B%E4%BB%BB%E5%8A%A1%EF%BC%9A%E4%B8%80%E6%9D%A1%E8%B7%AF%E8%B5%B0%E5%88%B0%E9%BB%91" target="_blank" rel="noopener">
+            <div class="article-meta"><span>Long-horizon Agent</span><time>2026.05</time></div>
+            <h3>用 LLM 做长程任务：一条路走到黑</h3>
+            <p>围绕长程任务中的规划、上下文与持续执行，讨论 LLM 如何走得更远。</p>
+            <span class="text-link">阅读全文 →</span>
+          </a>
+          <a class="article-card" href="https://shengxi.xyz/article/Graph%20RAG%20%E5%B7%A5%E7%A8%8B%E5%8C%96%EF%BD%9C%E5%A6%82%E4%BD%95%E8%AE%A9%20LLM%20%E6%8A%BD%E5%8F%96%E7%9A%84%22%E6%BC%82%E7%A7%BB%22%E5%8F%AF%E6%B2%BB%E7%90%86" target="_blank" rel="noopener">
+            <div class="article-meta"><span>Graph RAG</span><time>2026.05</time></div>
+            <h3>Graph RAG 工程化：如何让 LLM 抽取的“漂移”可治理</h3>
+            <p>从 Schema、约束与质量控制出发，把不可预测的模型抽取变成可治理的工程流程。</p>
+            <span class="text-link">阅读全文 →</span>
+          </a>
+          <a class="article-card" href="https://shengxi.xyz/article/%E4%BB%8E%22%E9%80%A0%E8%BD%AE%E5%AD%90%22%E5%88%B0%22%E6%90%AD%E8%84%9A%E6%89%8B%E6%9E%B6%22%EF%BC%9AAI%20%E6%97%B6%E4%BB%A3%E4%B8%8B%E6%88%91%E5%AF%B9%E4%BB%A3%E7%A0%81%E6%9C%AC%E8%B4%A8%E7%9A%84%E8%AE%A4%E7%9F%A5%E9%87%8D%E6%9E%84" target="_blank" rel="noopener">
+            <div class="article-meta"><span>Engineering Thinking</span><time>2026.02</time></div>
+            <h3>从“造轮子”到“搭脚手架”：AI 时代的代码观</h3>
+            <p>重新理解代码的角色：它不只是最终产品，也是让 AI 能力稳定落地的工程基础设施。</p>
+            <span class="text-link">阅读全文 →</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="impact-grid">
+        <a class="impact-card featured" href="https://blog.csdn.net/m0_62574889" target="_blank" rel="noopener">
+          <span class="impact-label">CSDN 技术博客</span>
+          <strong>846,000+</strong>
+          <p>累计访问，8,600+ 粉丝，700+ 篇原创内容，覆盖 Python、算法、AI 与工程实践。</p>
+          <span class="text-link">访问博客 →</span>
+        </a>
+        <article class="impact-card">
+          <span class="impact-label">公众号矩阵</span>
+          <strong>3,200+</strong>
+          <p>持续运营个人公众号与「Felix 的 AI 实验室」，分享 RAG、Agent 与 AI 工业化实践。</p>
+        </article>
+        <article class="impact-card">
+          <span class="impact-label">内容影响力</span>
+          <strong>150,000</strong>
+          <p>公众号单篇最高阅读量；同时运营小红书，积累 1,000+ 关注者。</p>
+        </article>
+        <article class="impact-card">
+          <span class="impact-label">校园与主持</span>
+          <strong>校友荟</strong>
+          <p>悉尼大学中国学联官方公众号专栏常驻撰稿人与活动主持人。</p>
+        </article>
+      </div>
+      <div class="note-card">
+        <span class="note-mark">“</span>
+        <p>写作让我把零散经验变成可复用的知识，也训练我在技术、产品和人的需求之间建立清晰的表达。</p>
+      </div>
+    </section>
+
+    <section class="section container" id="awards">
+      <div class="section-head">
+        <p class="section-kicker">Recognition</p>
+        <h2>奖学金与竞赛荣誉</h2>
+      </div>
+      <ol class="timeline">
+        <li>
+          <time>2024.06</time>
+          <div><h3>悉尼大学国际学生奖学金</h3><p>20,000 AUD · The University of Sydney</p></div>
+        </li>
+        <li>
+          <time>2024.02</time>
+          <div><h3>百度「河南 AI 人才培养项目」特等奖</h3><p>6,000 RMB · 全校唯一</p></div>
+        </li>
+        <li>
+          <time>2023</time>
+          <div><h3>全国大学生电子商务“创新、创意及创业”挑战赛</h3><p>省级一等奖</p></div>
+        </li>
+        <li>
+          <time>2023</time>
+          <div><h3>第十四届蓝桥杯全国软件和信息技术专业人才大赛</h3><p>省级二等奖</p></div>
+        </li>
+        <li>
+          <time>2022</time>
+          <div><h3>高教社杯全国大学生数学建模竞赛</h3><p>省级二等奖</p></div>
+        </li>
+        <li>
+          <time>2022</time>
+          <div><h3>全国大学生算法设计与编程挑战赛（夏季赛）</h3><p>国家级银奖</p></div>
+        </li>
+      </ol>
+      <p class="timeline-footnote">本科期间多次获得校级学业奖学金。</p>
+    </section>
+
+    <section class="section container" id="about">
+      <div class="about-layout">
+        <div class="section-head about-heading">
+          <p class="section-kicker">About</p>
+          <h2>可靠地把事情做成</h2>
+        </div>
+        <div class="about-body">
+          <p class="about-lead">
+            我成长于部队大院，执行力、责任感与团队协作是很早就形成的底色。后来一路学习并来到悉尼大学，
+            获得国际学生奖学金，也逐渐明确了自己希望长期投入的方向：企业 AI 应用与软件工程落地。
+          </p>
+          <p>
+            我希望帮助团队把模型、知识、数据和业务流程连接起来。我不仅关注 Agent 能否工作，也关注它背后的
+            前端体验、后端服务、数据链路与系统可靠性，能够把一个想法从原型推进为稳定的产品。
+          </p>
+          <div class="skill-group">
+            <h3>AI & Data</h3>
+            <ul class="tags">
+              <li>Python</li><li>RAG</li><li>AI Agent</li><li>Agent Skill</li><li>MCP</li>
+              <li>PostgreSQL</li><li>MySQL</li><li>向量检索</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3>Full-Stack Engineering</h3>
+            <ul class="tags">
+              <li>JavaScript</li><li>HTML / CSS</li><li>REST API</li><li>Java</li><li>Java Web</li>
+              <li>Spring</li><li>Spring Boot</li><li>微服务</li>
+            </ul>
+          </div>
+          <div class="hobbies">
+            <span>工作之外</span>
+            <p>羽毛球 · 写作 · 阅读 · 摄影 · 垂钓 · 徒步</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container" id="contact">
+      <div class="contact-card">
+        <div>
+          <p class="section-kicker">Let’s build something useful</p>
+          <h2>一起把 AI 用到真实业务里</h2>
+          <p>欢迎交流 AI 应用、全栈开发、数据工程、开源协作与工作机会。</p>
+        </div>
+        <div class="contact-actions">
+          <button class="btn btn-primary" data-copy="hanyuwang2026@163.com">hanyuwang2026@163.com</button>
+          <a class="btn btn-ghost" href="https://github.com/felix-windsor" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© <span id="year"></span> 王涵宇 Felix</span>
+      <span>Built with curiosity and consistency.</span>
+      <a href="#top">回到顶部 ↑</a>
+    </div>
+  </footer>
+  <script src="data/content.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
