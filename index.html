@@ -24,6 +24,7 @@
       <nav class="nav" id="nav">
         <a href="#projects" data-nav="projects">项目</a>
         <a href="#opensource" data-nav="opensource">开源</a>
+        <a href="#research" data-nav="research">科研</a>
         <a href="#writing" data-nav="writing">写作</a>
         <a href="#awards" data-nav="awards">荣誉</a>
         <a href="#about" data-nav="about">关于</a>
@@ -155,6 +156,65 @@
           <a class="text-link" href="https://github.com/pulls?q=is%3Apr+author%3Afelix-windsor+is%3Aopen" target="_blank" rel="noopener">查看仍开放的 PR →</a>
         </div>
       </details>
+    </section>
+
+    <section class="section container" id="research">
+      <div class="section-head research-intro">
+        <p class="section-kicker">Research Experience</p>
+        <h2>从控制系统到分布式智能</h2>
+        <p>这些研究训练了我把理论问题转化为算法、仿真与可验证实验的能力，也构成了我后来走向 AI 工程实践的技术起点。</p>
+      </div>
+
+      <div class="research-grid">
+        <article class="research-card research-card-featured">
+          <div class="research-card-head">
+            <div>
+              <span class="research-stage">Undergraduate Research</span>
+              <time>2022.02—2023.07</time>
+            </div>
+            <span class="research-role">学生第一作者</span>
+          </div>
+          <h3>多智能体系统自适应容错编队控制研究</h3>
+          <p>
+            面向执行器故障条件下的线性多智能体编队控制问题，参与设计分布式自适应容错控制协议，
+            使用 MATLAB LMI Toolbox 求解控制增益矩阵，并搭建包含三类执行器故障的六智能体仿真环境。
+            实验结果表明，系统在约 15 秒内实现状态收敛，编队误差趋近于零。
+          </p>
+          <div class="research-result">
+            <span>Publication · CCC 2023</span>
+            <p>研究成果发表于第 42 届中国控制会议，论文被 IEEE Xplore 收录。</p>
+            <a class="text-link" href="https://ieeexplore.ieee.org/document/10241212" target="_blank" rel="noopener">
+              查看论文：Distributed Adaptive Fault-Tolerant Formation of Linear Multi-Agent Systems →
+            </a>
+          </div>
+          <ul class="research-tags" aria-label="本科科研技术关键词">
+            <li>Multi-Agent Systems</li><li>Fault-Tolerant Control</li><li>Formation Control</li><li>MATLAB</li><li>LMI</li>
+          </ul>
+        </article>
+
+        <article class="research-card">
+          <div class="research-card-head">
+            <div>
+              <span class="research-stage">Graduate Research</span>
+              <time>研一暑期 · 2024.11—2025.02</time>
+            </div>
+            <span class="research-role">算法复现</span>
+          </div>
+          <h3>联邦学习算法复现｜悉尼大学 I-Net Group</h3>
+          <p>
+            在包巍老师指导的 I-Net Group 参与分布式机器学习研究，使用 PyTorch 从零实现 FedAvg 与 FedProx
+            的核心流程，包括客户端本地训练、服务端参数聚合和全局模型迭代，并协助课题组完成算法复现与实验验证。
+          </p>
+          <div class="research-result research-result-compact">
+            <span>Distributed Machine Learning</span>
+            <p>The University of Sydney · I-Net Group</p>
+            <a class="text-link" href="https://profiles.sydney.edu.au/wei.bao" target="_blank" rel="noopener">导师主页 →</a>
+          </div>
+          <ul class="research-tags" aria-label="硕士科研技术关键词">
+            <li>Federated Learning</li><li>FedAvg</li><li>FedProx</li><li>PyTorch</li><li>Distributed ML</li>
+          </ul>
+        </article>
+      </div>
     </section>
 
     <section class="section container" id="writing">
