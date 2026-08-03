@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="960" viewBox="0 0 1600 960" role="img" aria-labelledby="title desc">
+  <title id="title">Procurement Pricing MCP 审核与核价状态链</title>
+  <desc id="desc">从不可信采购文件进入、BOM 候选合并、人工复核和批准，到固定行情快照、Decimal 核价和 Excel 报告的受控流程。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#15120d"/><stop offset="1" stop-color="#2b2419"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#e8b25f"/><stop offset="1" stop-color="#f5cd8a"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#000" flood-opacity=".35"/></filter>
+  </defs>
+  <rect width="1600" height="960" fill="url(#bg)"/>
+  <circle cx="1420" cy="100" r="280" fill="#e8b25f" opacity=".07"/>
+  <text x="92" y="98" fill="#e8b25f" font-family="Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="5">PROCUREMENT PRICING MCP</text>
+  <text x="92" y="166" fill="#f6f1e7" font-family="Arial, 'PingFang SC', sans-serif" font-size="54" font-weight="700">先冻结证据，再运行核价</text>
+  <text x="92" y="216" fill="#c3b8a4" font-family="Arial, 'PingFang SC', sans-serif" font-size="25">LLM 负责理解与对话 · Python 负责状态、边界、Decimal 计算与报告</text>
+
+  <g filter="url(#shadow)">
+    <g transform="translate(92 316)">
+      <rect width="250" height="270" rx="22" fill="#211c14" stroke="#5c4b32" stroke-width="2"/>
+      <circle cx="42" cy="42" r="18" fill="#e8b25f" opacity=".2"/><text x="42" y="50" text-anchor="middle" fill="#f5cd8a" font-family="Arial" font-size="20" font-weight="700">1</text>
+      <text x="30" y="100" fill="#f6f1e7" font-family="Arial, 'PingFang SC'" font-size="28" font-weight="700">不可信文件</text>
+      <text x="30" y="146" fill="#c3b8a4" font-family="Arial, 'PingFang SC'" font-size="20">Excel · PDF · ZIP</text>
+      <text x="30" y="180" fill="#c3b8a4" font-family="Arial, 'PingFang SC'" font-size="20">图片 · 图纸</text>
+      <rect x="30" y="216" width="190" height="34" rx="17" fill="#342a1d"/><text x="125" y="240" text-anchor="middle" fill="#e8b25f" font-family="Arial" font-size="16">PathGuard + Hash</text>
+    </g>
+    <g transform="translate(384 316)">
+      <rect width="250" height="270" rx="22" fill="#211c14" stroke="#5c4b32" stroke-width="2"/>
+      <circle cx="42" cy="42" r="18" fill="#e8b25f" opacity=".2"/><text x="42" y="50" text-anchor="middle" fill="#f5cd8a" font-family="Arial" font-size="20" font-weight="700">2</text>
+      <text x="30" y="100" fill="#f6f1e7" font-family="Arial, 'PingFang SC'" font-size="28" font-weight="700">BOM 草稿</text>
+      <text x="30" y="146" fill="#c3b8a4" font-family="Arial, 'PingFang SC'" font-size="20">结构化解析</text>
+      <text x="30" y="180" fill="#c3b8a4" font-family="Arial, 'PingFang SC'" font-size="20">视觉候选 + 证据</text>
+      <rect x="30" y="216" width="190" height="34" rx="17" fill="#342a1d"/><text x="125" y="240" text-anchor="middle" fill="#e8b25f" font-family="Arial" font-size="16">Conflict Detection</text>
+    </g>
+    <g transform="translate(676 316)">
+      <rect width="250" height="270" rx="22" fill="#211c14" stroke="#e8b25f" stroke-width="2"/>
+      <circle cx="42" cy="42" r="18" fill="#e8b25f" opacity=".2"/><text x="42" y="50" text-anchor="middle" fill="#f5cd8a" font-family="Arial" font-size="20" font-weight="700">3</text>
+      <text x="30" y="100" fill="#f6f1e7" font-family="Arial, 'PingFang SC'" font-size="28" font-weight="700">人工批准</text>
+      <text x="30" y="146" fill="#c3b8a4" font-family="Arial, 'PingFang SC'" font-size="20">修正冲突</text>
+      <text x="30" y="180" fill="#c3b8a4" font-family="Arial, 'PingFang SC'" font-size="20">冻结版本与 Hash</text>
+      <rect x="30" y="216" width="190" height="34" rx="17" fill="#553e1c"/><text x="125" y="240" text-anchor="middle" fill="#f5cd8a" font-family="Arial" font-size="16">Approval Gate</text>
+    </g>
+    <g transform="translate(968 316)">
+      <rect width="250" height="270" rx="22" fill="#211c14" stroke="#5c4b32" stroke-width="2"/>
+      <circle cx="42" cy="42" r="18" fill="#e8b25f" opacity=".2"/><text x="42" y="50" text-anchor="middle" fill="#f5cd8a" font-family="Arial" font-size="20" font-weight="700">4</text>
+      <text x="30" y="100" fill="#f6f1e7" font-family="Arial, 'PingFang SC'" font-size="28" font-weight="700">固定快照</text>
+      <text x="30" y="146" fill="#c3b8a4" font-family="Arial, 'PingFang SC'" font-size="20">Mock 行情来源</text>
+      <text x="30" y="180" fill="#c3b8a4" font-family="Arial, 'PingFang SC'" font-size="20">口径差异阻断</text>
+      <rect x="30" y="216" width="190" height="34" rx="17" fill="#342a1d"/><text x="125" y="240" text-anchor="middle" fill="#e8b25f" font-family="Arial" font-size="16">Source Provenance</text>
+    </g>
+    <g transform="translate(1260 316)">
+      <rect width="250" height="270" rx="22" fill="#211c14" stroke="#5c4b32" stroke-width="2"/>
+      <circle cx="42" cy="42" r="18" fill="#e8b25f" opacity=".2"/><text x="42" y="50" text-anchor="middle" fill="#f5cd8a" font-family="Arial" font-size="20" font-weight="700">5</text>
+      <text x="30" y="100" fill="#f6f1e7" font-family="Arial, 'PingFang SC'" font-size="28" font-weight="700">核价报告</text>
+      <text x="30" y="146" fill="#c3b8a4" font-family="Arial, 'PingFang SC'" font-size="20">Decimal 计算</text>
+      <text x="30" y="180" fill="#c3b8a4" font-family="Arial, 'PingFang SC'" font-size="20">异常 + Excel</text>
+      <rect x="30" y="216" width="190" height="34" rx="17" fill="#342a1d"/><text x="125" y="240" text-anchor="middle" fill="#e8b25f" font-family="Arial" font-size="16">Audit Evidence</text>
+    </g>
+  </g>
+  <g fill="#e8b25f" font-family="Arial" font-size="38" font-weight="700">
+    <text x="355" y="462">→</text><text x="647" y="462">→</text><text x="939" y="462">→</text><text x="1231" y="462">→</text>
+  </g>
+  <rect x="92" y="680" width="1418" height="164" rx="22" fill="#17140f" stroke="#4a3d2c"/>
+  <text x="124" y="730" fill="#e8b25f" font-family="Arial" font-size="18" font-weight="700" letter-spacing="3">FAIL-CLOSED BOUNDARIES</text>
+  <g fill="#c3b8a4" font-family="Arial, 'PingFang SC'" font-size="22">
+    <text x="124" y="782">未批准 BOM 不核价</text><text x="416" y="782">文档文字不执行</text><text x="690" y="782">Mock 不冒充真实行情</text><text x="1028" y="782">最低价不自动定点</text>
+  </g>
+  <line x1="382" y1="755" x2="382" y2="810" stroke="#4a3d2c"/><line x1="660" y1="755" x2="660" y2="810" stroke="#4a3d2c"/><line x1="996" y1="755" x2="996" y2="810" stroke="#4a3d2c"/>
+  <rect x="92" y="880" width="1418" height="4" rx="2" fill="url(#gold)" opacity=".8"/>
+</svg>

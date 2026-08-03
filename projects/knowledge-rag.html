@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multi-Model Knowledge RAG System 案例详情 · Felix Wang</title>
+  <meta name="description" content="企业文档 Graph RAG 案例：多格式解析、closed schema 抽取、关系置信度、Qdrant、Neo4j 与可复现评测。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="case-study.css" />
+</head>
+<body>
+  <header class="case-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html"><span class="brand-mark"></span>Felix Wang</a>
+      <nav class="case-nav" aria-label="案例导航">
+        <a href="#architecture">检索链路</a>
+        <a href="../index.html#projects">← 返回项目</a>
+        <a href="https://github.com/felix-windsor/Multi-Model-Knowledge-RAG-System" target="_blank" rel="noopener">GitHub ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="case-hero container">
+      <p class="eyebrow">Enterprise AI Case Study · 重点案例</p>
+      <h1>Knowledge<br />Graph RAG</h1>
+      <p class="case-lead">一个面向强合规行业与长期知识资产的企业文档智能阅读系统。它以 LightRAG / RAGAnything 为底座，把 PDF、Word、Excel、PPT 与图片解析为可检索内容，并用 closed schema、关系置信度和可复现评测约束知识图谱抽取。</p>
+      <div class="hero-actions">
+        <a class="button primary" href="https://github.com/felix-windsor/Multi-Model-Knowledge-RAG-System" target="_blank" rel="noopener">查看源码</a>
+        <a class="button" href="#architecture">查看检索链路</a>
+      </div>
+      <dl class="facts">
+        <div class="fact"><dt>Public corpus</dt><dd>200 篇文档</dd></div>
+        <div class="fact"><dt>Corpus scale</dt><dd>349,901 词</dd></div>
+        <div class="fact"><dt>Query modes</dt><dd>5 种检索模式</dd></div>
+        <div class="fact"><dt>Storage</dt><dd>Local / Qdrant + Neo4j</dd></div>
+      </dl>
+    </section>
+
+    <section class="container">
+      <figure class="hero-visual">
+        <img src="../assets/projects/knowledge-rag-dashboard.png" alt="Multi-Model Knowledge RAG 企业文档工作台，提供上传、问答、图谱和设置入口" />
+        <figcaption><strong>当前真实界面：</strong>FastAPI 直接托管前端，提供文档上传、文档库、问答、知识图谱和设置入口。截图来自本地 local-storage 模式的干净实例，因此展示的是空库状态，而不是虚构业务数据。</figcaption>
+      </figure>
+    </section>
+
+    <section class="case-section container">
+      <div class="split">
+        <article class="panel">
+          <span class="panel-tag">Problem</span>
+          <h3>全文搜索很难回答“谁在何时批准了什么”</h3>
+          <p>在半导体、金融、医疗等强合规场景，文档可能保存 7–10 年。关键信息常藏在扫描件、表格和跨文档关系里，查询对象是实体、决策人与变更链，而不只是关键词。</p>
+        </article>
+        <article class="panel">
+          <span class="panel-tag">Approach</span>
+          <h3>把 Graph RAG 的不可预测部分变成可测量接缝</h3>
+          <p>保留 LightRAG / RAGAnything 的检索能力，在上游薄弱处增加多格式 parser 路由、closed schema 实体关系抽取、JSON 修复、类型漂移统计、关系置信度和 Sidecar 质量报告。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="case-section container">
+      <div class="section-heading">
+        <span class="section-label">Shipped System</span>
+        <h2>从上传文件到图谱问答的六个工程面</h2>
+      </div>
+      <div class="number-grid">
+        <article class="number-card"><span class="num">01</span><h3>多格式文档入口</h3><p>支持 PDF、Word、Excel、PPT 与图片；上传后创建后台任务，文档状态与任务状态通过 V1 API 查询。</p></article>
+        <article class="number-card"><span class="num">02</span><h3>Closed Schema 抽取</h3><p>实体和关系类型进入 Pydantic 模型；未知类型映射并记录 drift，不让模型自由扩张生产 Schema。</p></article>
+        <article class="number-card"><span class="num">03</span><h3>抽取质量治理</h3><p>对 JSON 解析、Schema 校验、实体去重、无效关系、类型漂移、耗时与关系置信度输出可复查指标。</p></article>
+        <article class="number-card"><span class="num">04</span><h3>双层存储后端</h3><p>开发模式使用本地存储；集成路径可切换 Qdrant + Neo4j，并在启动时检查依赖健康、失败时返回 503。</p></article>
+        <article class="number-card"><span class="num">05</span><h3>五类查询模式</h3><p><code>mix</code>、<code>local</code>、<code>global</code>、<code>hybrid</code> 与 <code>naive</code> 覆盖局部片段、全局关系和 baseline 对照。</p></article>
+        <article class="number-card"><span class="num">06</span><h3>API 与可视化</h3><p>提供文档、任务、问答、流式问答、图谱导出和健康检查 API；前端用 vis.js 展示实体关系。</p></article>
+      </div>
+    </section>
+
+    <section class="case-section container" id="architecture">
+      <div class="section-heading">
+        <span class="section-label">Document Lifecycle</span>
+        <h2>一份文档怎样变成可追踪的回答</h2>
+      </div>
+      <div class="flow">
+        <article class="flow-step"><span>01</span><h3>Upload</h3><p>API Key 保护上传入口，保存文档记录并创建异步处理任务。</p></article>
+        <article class="flow-step"><span>02</span><h3>Parse</h3><p>按文件类型路由解析，多模态内容交给本地视觉模型理解。</p></article>
+        <article class="flow-step"><span>03</span><h3>Extract</h3><p>Chunk 进入 closed schema 抽取，修复 JSON、规范实体并评分关系。</p></article>
+        <article class="flow-step"><span>04</span><h3>Persist</h3><p>向量与图谱分别进入本地后端或 Qdrant / Neo4j。</p></article>
+        <article class="flow-step"><span>05</span><h3>Query</h3><p>按问题选择局部、全局、混合或 baseline 路径并生成回答。</p></article>
+      </div>
+    </section>
+
+    <section class="case-section container">
+      <div class="section-heading">
+        <span class="section-label">Evaluation Assets</span>
+        <h2>不仅准备 Demo，也准备可公开复查的评测锚点</h2>
+        <p>仓库把 corpus、来源、许可证、语言、词数、SHA-256 和验证脚本一起提交，避免用无法重建的私有数据证明效果。</p>
+      </div>
+      <div class="split">
+        <article class="panel"><span class="panel-tag">Public Project Docs</span><h3>200 篇 · 349,901 词</h3><p>120 篇 PURE SRS、47 篇 GitHub PRD / Spec、33 篇公开技术博客；其中英文 163 篇、中文 37 篇。</p></article>
+        <article class="panel"><span class="panel-tag">Multi-format Corpus</span><h3>200 份 · 7 种格式</h3><p>包含 103 PDF、44 XLSX、44 CSV，以及 DOC、DOCX、XLS、HTML；覆盖流程制度、技术手册、扫描图示、表格台账和 API 配置。</p></article>
+      </div>
+    </section>
+
+    <section class="case-section container">
+      <div class="section-heading"><span class="section-label">Engineering Decisions</span><h2>三个决定限定了这个项目的价值边界</h2></div>
+      <div class="decision-list">
+        <article class="decision"><span>1</span><div><h3>Graph RAG 用在 entity-centric 问题，而不是替代所有向量检索</h3><p>跨文档实体溯源、决策人与变更链是图谱优势；对于文档短命、迭代极快的场景，维护图谱的 ROI 可能不足。</p></div></article>
+        <article class="decision"><span>2</span><div><h3>Closed schema 优先于开放式“发现一切”</h3><p>强合规场景更重视可审计、可比较和可治理。类型漂移被映射与计数，而不是悄悄成为新的生产类型。</p></div></article>
+        <article class="decision"><span>3</span><div><h3>自研集中在接缝，不重写成熟上游</h3><p>解析路由、Schema 抽取、置信度与质量 Sidecar 是差异化增量；底层检索继续复用 LightRAG / RAGAnything。</p></div></article>
+      </div>
+    </section>
+
+    <section class="case-section container">
+      <div class="evidence">
+        <div><span class="section-label">Reproducible Evidence</span><h2>当前代码与评测资产可以独立验证</h2><p>本次案例整理实际运行了健康 API、文档 Sidecar、LightRAG wrapper 与公开数据集校验相关测试，共 27 项通过；完整单元测试不依赖外部 Qdrant / Neo4j。</p></div>
+        <pre>cp env.example .env
+cd backend
+python -m pytest
+python -m uvicorn app.main:app --port 8000
+
+# 可选集成后端
+docker compose up -d qdrant neo4j
+python -m pytest -m integration</pre>
+      </div>
+    </section>
+
+    <section class="case-section container">
+      <div class="boundary-grid">
+        <article class="boundary good"><span class="state">Current Fit</span><h3>当前适合</h3><ul><li>强合规行业的长期文档与实体溯源。</li><li>大型组织 onboarding 与跨文档知识关联。</li><li>需要私有模型、内网部署和可公开评测资产的原型验证。</li></ul></article>
+        <article class="boundary caution"><span class="state">Honest Boundaries</span><h3>仍需补强</h3><ul><li>当前更接近架构验证版，不是完整生产知识平台。</li><li>回答尚需补齐文档、页码、chunk、分数与实体路径级引用。</li><li>FastAPI background task 后续应演进为队列式任务系统。</li><li>当前 CORS、错误暴露、并发控制与运行指标仍需生产收敛。</li></ul></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="case-footer"><div class="container"><a href="flowops.html">← 上一个案例：FlowOps</a><a href="procurement-pricing.html">下一个案例：Procurement MCP →</a></div></footer>
+</body>
+</html>

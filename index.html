@@ -38,21 +38,86 @@
 
   <main>
     <section class="hero container">
-      <p class="eyebrow">AI Engineering · Full-Stack Development</p>
-      <h1 class="hero-title">
-        你好，我是<span class="accent">王涵宇 Felix</span>。<br />
-        用完整的工程能力，把 AI 做成真正可用的产品。
-      </h1>
-      <p class="hero-sub">
-        我具备从前端交互、后端服务到数据处理与模型集成的完整开发能力，关注企业 AI 应用的工程落地。
-        Agent、RAG 与 MCP 是我的重点实践方向，但我的目标始终是解决真实问题并交付能够稳定运行的系统。
-      </p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#projects">查看项目</a>
-        <a class="btn btn-ghost" href="https://github.com/felix-windsor" target="_blank" rel="noopener">GitHub</a>
-        <a class="text-link" href="#writing">阅读我的文章 →</a>
+      <div class="hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow">AI Engineering · Full-Stack Development</p>
+          <h1 class="hero-title">
+            你好，我是<span class="accent">王涵宇 Felix</span>。<br />
+            用完整的工程能力，把 AI 做成真正可用的产品。
+          </h1>
+          <p class="hero-sub">
+            我具备从前端交互、后端服务到数据处理与模型集成的完整开发能力，关注企业 AI 应用的工程落地。
+            Agent、RAG 与 MCP 是我的重点实践方向，但我的目标始终是解决真实问题并交付能够稳定运行的系统。
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">查看项目</a>
+            <a class="btn btn-ghost" href="https://github.com/felix-windsor" target="_blank" rel="noopener">GitHub</a>
+            <a class="text-link" href="#writing">阅读我的文章 →</a>
+          </div>
+        </div>
+
+        <div class="system-visual" data-system-visual aria-label="AI 应用请求经过模型网关、知识库和工具，最终形成可观测证据的动态示意图">
+          <div class="system-visual-head">
+            <span><i aria-hidden="true"></i> Live system</span>
+            <code>req_7f3a</code>
+          </div>
+          <div class="system-stage">
+            <svg class="system-routes" viewBox="0 0 600 430" aria-hidden="true" preserveAspectRatio="none">
+              <path class="route route-main" d="M92 215 C160 215 176 215 235 215" />
+              <path class="route" d="M358 215 C410 215 418 105 493 105" />
+              <path class="route" d="M358 215 C410 215 418 215 493 215" />
+              <path class="route" d="M358 215 C410 215 418 325 493 325" />
+              <path class="route route-evidence" d="M296 268 C296 315 296 342 296 382" />
+              <circle class="route-packet packet-main" r="5">
+                <animateMotion dur="2.8s" repeatCount="indefinite" path="M92 215 C160 215 176 215 235 215" />
+              </circle>
+              <circle class="route-packet packet-provider" r="4">
+                <animateMotion begin=".9s" dur="3.2s" repeatCount="indefinite" path="M358 215 C410 215 418 105 493 105" />
+              </circle>
+              <circle class="route-packet packet-tool" r="4">
+                <animateMotion begin="1.7s" dur="3.2s" repeatCount="indefinite" path="M358 215 C410 215 418 325 493 325" />
+              </circle>
+            </svg>
+
+            <div class="system-node node-client">
+              <span class="node-icon">⌁</span>
+              <strong>AI App</strong>
+              <small>Anthropic Messages</small>
+            </div>
+            <div class="system-node node-gateway">
+              <span class="node-pulse" aria-hidden="true"></span>
+              <span class="node-icon">MG</span>
+              <strong>ModelGate</strong>
+              <small>route · adapt · govern</small>
+            </div>
+            <div class="system-node node-model">
+              <span class="node-state">healthy</span>
+              <strong>Models</strong>
+              <small>Claude · OpenAI</small>
+            </div>
+            <div class="system-node node-rag">
+              <span class="node-state">18 ms</span>
+              <strong>Knowledge</strong>
+              <small>Graph RAG</small>
+            </div>
+            <div class="system-node node-tools">
+              <span class="node-state">3 tools</span>
+              <strong>MCP Tools</strong>
+              <small>controlled actions</small>
+            </div>
+            <div class="system-node node-evidence">
+              <span class="evidence-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              <div><strong>Evidence</strong><small>trace · usage · cost</small></div>
+              <span class="evidence-value">200</span>
+            </div>
+          </div>
+          <div class="system-visual-foot">
+            <span><i class="status-dot"></i> All systems operational</span>
+            <span>p95 420ms</span>
+          </div>
+        </div>
       </div>
-      <ul class="stats" data-profile-stats></ul>
+      <ul class="stats" data-profile-stats aria-label="个人影响力数据"></ul>
     </section>
 
     <section class="section container" id="projects">

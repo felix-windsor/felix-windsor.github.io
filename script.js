@@ -20,7 +20,7 @@ function renderStats() {
       .map(
         (m) => `
         <li>
-          <span class="num">${m.num}</span>
+          <span class="num" data-count="${m.num}">${m.num}</span>
           <span class="label">${m.label}</span>
         </li>`
       )
@@ -85,17 +85,174 @@ function initFilters() {
     const btn = e.target.closest(".filter");
     if (!btn) return;
 
+    const cards = Array.from(document.querySelectorAll(".project-grid .card"));
+    const previousPositions = new Map();
+    cards.forEach((card) => {
+      if (!card.classList.contains("is-hidden") && card.getBoundingClientRect) {
+        previousPositions.set(card, card.getBoundingClientRect());
+      }
+    });
+
     // 切换按钮高亮
     filterBar.querySelectorAll(".filter").forEach((b) => b.classList.remove("is-active"));
     btn.classList.add("is-active");
 
     // 显示/隐藏卡片
     const want = btn.dataset.filter;
-    document.querySelectorAll(".project-grid .card").forEach((card) => {
+    cards.forEach((card) => {
       const match = want === "all" || card.dataset.category === want;
       card.classList.toggle("is-hidden", !match);
+      if (match) card.classList.add("is-revealed");
+    });
+
+    // FLIP：筛选后仍显示的卡片平滑移动到新位置，新出现的卡片淡入。
+    if (typeof requestAnimationFrame === "function") {
+      requestAnimationFrame(() => {
+        cards.forEach((card) => {
+          if (card.classList.contains("is-hidden")) return;
+          const previous = previousPositions.get(card);
+          const current = card.getBoundingClientRect?.();
+          if (previous && current && typeof card.animate === "function") {
+            card.animate(
+              [
+                { transform: `translate(${previous.left - current.left}px, ${previous.top - current.top}px)` },
+                { transform: "translate(0, 0)" }
+              ],
+              { duration: 480, easing: "cubic-bezier(0.22, 1, 0.36, 1)" }
+            );
+          } else if (!previous) {
+            card.classList.remove("filter-enter");
+            void card.offsetWidth;
+            card.classList.add("filter-enter");
+            setTimeout(() => card.classList.remove("filter-enter"), 460);
+          }
+        });
+      });
+    }
+  });
+}
+
+/* ---------- 2b. 滚动进入、卡片聚光与首屏系统视差 ---------- */
+function prefersReducedMotion() {
+  return typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function initReveal() {
+  const targets = document.querySelectorAll(
+    ".section-head, .filters, .project-grid .card, .opensource-featured, .opensource-card, " +
+    ".research-card, .blog-home-card, .article-card, .impact-card, .about-layout, .contact-card"
+  );
+  if (!targets.length) return;
+
+  targets.forEach((target, index) => {
+    target.setAttribute("data-reveal", "");
+    const siblingIndex = target.matches?.(".card, .opensource-card, .article-card, .impact-card")
+      ? index % 3
+      : 0;
+    target.style.setProperty("--reveal-delay", `${siblingIndex * 85}ms`);
+  });
+
+  document.documentElement.classList.add("motion-ready");
+  if (prefersReducedMotion() || typeof IntersectionObserver !== "function") {
+    targets.forEach((target) => target.classList.add("is-revealed"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-revealed");
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -9% 0px" }
+  );
+  targets.forEach((target) => observer.observe(target));
+}
+
+function initCardEffects() {
+  if (prefersReducedMotion() ||
+      (typeof window.matchMedia === "function" && !window.matchMedia("(pointer: fine)").matches)) return;
+
+  document.querySelectorAll(".project-grid .card").forEach((card) => {
+    card.addEventListener("pointermove", (event) => {
+      const rect = card.getBoundingClientRect();
+      const x = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+      const y = Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height));
+      card.style.setProperty("--pointer-x", `${x * 100}%`);
+      card.style.setProperty("--pointer-y", `${y * 100}%`);
+      card.style.setProperty("--card-rx", `${(0.5 - y) * 5}deg`);
+      card.style.setProperty("--card-ry", `${(x - 0.5) * 6}deg`);
+    });
+    card.addEventListener("pointerleave", () => {
+      card.style.setProperty("--card-rx", "0deg");
+      card.style.setProperty("--card-ry", "0deg");
     });
   });
+}
+
+function initSystemVisual() {
+  const visual = document.querySelector("[data-system-visual]");
+  if (!visual || prefersReducedMotion()) return;
+  if (typeof window.matchMedia === "function" && !window.matchMedia("(pointer: fine)").matches) return;
+
+  visual.addEventListener("pointermove", (event) => {
+    const rect = visual.getBoundingClientRect();
+    const x = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+    const y = Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height));
+    visual.style.setProperty("--spot-x", `${x * 100}%`);
+    visual.style.setProperty("--spot-y", `${y * 100}%`);
+    visual.style.setProperty("--tilt-x", `${(0.5 - y) * 2.5}deg`);
+    visual.style.setProperty("--tilt-y", `${(x - 0.5) * 3}deg`);
+  });
+  visual.addEventListener("pointerleave", () => {
+    visual.style.setProperty("--spot-x", "72%");
+    visual.style.setProperty("--spot-y", "18%");
+    visual.style.setProperty("--tilt-x", "0deg");
+    visual.style.setProperty("--tilt-y", "0deg");
+  });
+}
+
+/* ---------- 2c. 统计数字进入视口后递增 ---------- */
+function initCounters() {
+  const counters = document.querySelectorAll("[data-count]");
+  if (!counters.length || prefersReducedMotion() || typeof IntersectionObserver !== "function") return;
+
+  const animateCounter = (counter) => {
+    const raw = counter.dataset.count || counter.textContent;
+    const match = raw.match(/^([\d.]+)(.*)$/);
+    if (!match || typeof requestAnimationFrame !== "function") return;
+    const target = Number(match[1]);
+    const suffix = match[2];
+    const decimals = match[1].includes(".") ? match[1].split(".")[1].length : 0;
+    const duration = 1250;
+    let startedAt;
+    counter.textContent = `0${suffix}`;
+
+    const tick = (time) => {
+      if (startedAt === undefined) startedAt = time;
+      const progress = Math.min(1, (time - startedAt) / duration);
+      const eased = 1 - Math.pow(1 - progress, 4);
+      counter.textContent = `${(target * eased).toFixed(decimals)}${suffix}`;
+      if (progress < 1) requestAnimationFrame(tick);
+      else counter.textContent = raw;
+    };
+    requestAnimationFrame(tick);
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        animateCounter(entry.target);
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.65 }
+  );
+  counters.forEach((counter) => observer.observe(counter));
 }
 
 /* ---------- 3a. 手机菜单开关 ---------- */
@@ -170,6 +327,10 @@ document.addEventListener("DOMContentLoaded", () => {
   renderStats();
   renderProjects();
   initFilters();
+  initReveal();
+  initCardEffects();
+  initSystemVisual();
+  initCounters();
   initMobileMenu();
   initScrollSpy();
   initCopy();

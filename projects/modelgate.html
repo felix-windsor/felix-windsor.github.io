@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="case-study.css" />
+  <script src="modelgate.js" defer></script>
 </head>
 <body>
   <header class="case-header">
@@ -94,17 +95,39 @@
       </div>
     </section>
 
-    <section class="case-section container" id="architecture">
+    <section class="case-section container request-lifecycle" id="architecture">
       <div class="section-heading">
         <span class="section-label">Request Lifecycle</span>
         <h2>一次请求如何穿过网关</h2>
+        <p>滚动到这里后，演示会自动运行：请求只有通过身份、策略与路由检查，才会进入协议适配并形成可追踪证据。</p>
       </div>
-      <div class="flow">
-        <article class="flow-step"><span>01</span><h3>Client Edge</h3><p>接收 Anthropic Messages，分配 request ID，限制 body 并校验 <code>max_tokens</code>。</p></article>
-        <article class="flow-step"><span>02</span><h3>Identity & Policy</h3><p>鉴权 API Key，检查用户状态、IP、模型、Provider、配额与费用窗口。</p></article>
-        <article class="flow-step"><span>03</span><h3>Route Plan</h3><p>解析别名和模型，选择凭证池，跳过冷却 Provider 并生成有界尝试计划。</p></article>
-        <article class="flow-step"><span>04</span><h3>Protocol Adapter</h3><p>直通 Anthropic，或映射 OpenAI Chat、Tool Use 与 SSE 增量事件。</p></article>
-        <article class="flow-step"><span>05</span><h3>Evidence</h3><p>记录响应、usage 来源、费用估算、Provider 结果、健康与 Prometheus 指标。</p></article>
+      <div class="flow-demo" data-flow-demo>
+        <div class="flow-console">
+          <div class="flow-request">
+            <span class="flow-live"><i></i> LIVE TRACE</span>
+            <code>POST /v1/messages</code>
+            <span class="flow-request-id">req_7f3a9c</span>
+          </div>
+          <div class="flow-status" aria-live="polite">
+            <span class="flow-status-icon">⌁</span>
+            <div><small>Current stage</small><strong data-flow-status>等待请求进入网关</strong></div>
+            <span class="flow-latency" data-flow-latency>0 ms</span>
+          </div>
+        </div>
+        <div class="flow-progress" aria-hidden="true"><i data-flow-progress></i></div>
+        <div class="flow">
+          <article class="flow-step" data-flow-step="0"><span>01</span><h3>Client Edge</h3><p>接收 Anthropic Messages，分配 request ID，限制 body 并校验 <code>max_tokens</code>。</p><small class="step-result">accepted · 14 KB</small></article>
+          <article class="flow-step" data-flow-step="1"><span>02</span><h3>Identity & Policy</h3><p>鉴权 API Key，检查用户状态、IP、模型、Provider、配额与费用窗口。</p><small class="step-result">policy passed</small></article>
+          <article class="flow-step" data-flow-step="2"><span>03</span><h3>Route Plan</h3><p>解析别名和模型，选择凭证池，跳过冷却 Provider 并生成有界尝试计划。</p><small class="step-result">claude-3-7 · primary</small></article>
+          <article class="flow-step" data-flow-step="3"><span>04</span><h3>Protocol Adapter</h3><p>直通 Anthropic，或映射 OpenAI Chat、Tool Use 与 SSE 增量事件。</p><small class="step-result">SSE stream open</small></article>
+          <article class="flow-step" data-flow-step="4"><span>05</span><h3>Evidence</h3><p>记录响应、usage 来源、费用估算、Provider 结果、健康与 Prometheus 指标。</p><small class="step-result">trace committed</small></article>
+        </div>
+        <div class="flow-summary">
+          <span><i></i> 200 OK</span>
+          <span>usage: upstream-returned</span>
+          <span>cost: $0.0042</span>
+          <button type="button" data-flow-replay>重新播放 ↻</button>
+        </div>
       </div>
     </section>
 

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Procurement Pricing MCP 案例详情 · Felix Wang</title>
+  <meta name="description" content="采购询比价与注塑件核价 MCP 案例：不可信文档、BOM 审批状态机、固定行情快照、Decimal 计算和 Excel 报告。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="case-study.css" />
+</head>
+<body>
+  <header class="case-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html"><span class="brand-mark"></span>Felix Wang</a>
+      <nav class="case-nav" aria-label="案例导航">
+        <a href="#architecture">核价链路</a>
+        <a href="../index.html#projects">← 返回项目</a>
+        <a href="https://github.com/felix-windsor/hermes-procurement-pricing-mcp" target="_blank" rel="noopener">GitHub ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="case-hero container">
+      <p class="eyebrow">MCP Workflow Case Study · 重点案例</p>
+      <h1>Procurement<br />Pricing MCP</h1>
+      <p class="case-lead">一个连接 Telegram / Hermes 与 Python 核价内核的采购询比价 MVP。LLM 负责理解文件、视觉页面和用户意图；Python 强制执行路径安全、BOM 证据、人工批准、固定行情快照、Decimal 计算、异常规则和 Excel 报告。</p>
+      <div class="hero-actions">
+        <a class="button primary" href="https://github.com/felix-windsor/hermes-procurement-pricing-mcp" target="_blank" rel="noopener">查看源码</a>
+        <a class="button" href="#architecture">查看核价链路</a>
+      </div>
+      <dl class="facts">
+        <div class="fact"><dt>MCP surface</dt><dd>9 个业务工具</dd></div>
+        <div class="fact"><dt>Workflow</dt><dd>10 个受控状态</dd></div>
+        <div class="fact"><dt>Calculation</dt><dd>Decimal · ROUND_HALF_UP</dd></div>
+        <div class="fact"><dt>Delivery</dt><dd>Telegram · Excel</dd></div>
+      </dl>
+    </section>
+
+    <section class="container">
+      <figure class="hero-visual">
+        <img src="../assets/projects/procurement-workflow.svg" alt="Procurement Pricing MCP 从采购文件到批准 BOM、行情快照和核价报告的受控流程" />
+        <figcaption><strong>真实职责边界：</strong>项目没有独立 Web 控制台，交互面是 Hermes / Telegram、MCP 工具返回与最终 Excel 附件；这张图依据仓库状态机和本次本地 Demo 输出绘制，不冒充产品截图。</figcaption>
+      </figure>
+    </section>
+
+    <section class="case-section container">
+      <div class="split">
+        <article class="panel"><span class="panel-tag">Problem</span><h3>让 Agent“看懂报价单”不等于可以让它直接核价</h3><p>采购文件可能缺字段、互相冲突，甚至包含提示注入。视觉模型的候选字段也可能错误；如果没有状态门禁、来源证据和人工批准，LLM 很容易跳过复核或编造市场价格。</p></article>
+        <article class="panel"><span class="panel-tag">Approach</span><h3>LLM 提候选，Python 决定什么可以发生</h3><p>MCP 只暴露业务级工具；每次调用返回当前状态、允许动作和阻断动作。未批准 BOM 不能核价，行情口径冲突必须复核，财务计算只由版本化规则和 Decimal 执行。</p></article>
+      </div>
+    </section>
+
+    <section class="case-section container">
+      <div class="section-heading"><span class="section-label">Shipped System</span><h2>从文档边界到报告证据的六个工程面</h2></div>
+      <div class="number-grid">
+        <article class="number-card"><span class="num">01</span><h3>受控文件入口</h3><p>PathGuard 解析真实路径、限制允许根目录并立即复制进服务端 Job；ZIP 检查逃逸和体量，拒绝敏感路径与符号链接绕过。</p></article>
+        <article class="number-card"><span class="num">02</span><h3>结构化与视觉候选</h3><p>Excel / PDF / ZIP 进入 parser 路由；图片和图纸只产生带 confidence、source_text、页码与内容 Hash 的候选字段。</p></article>
+        <article class="number-card"><span class="num">03</span><h3>BOM 冲突与批准</h3><p>按来源优先级合并候选，缺失、低置信度和冲突形成 Review Issue；人工修正后冻结 BOM 版本与 SHA-256。</p></article>
+        <article class="number-card"><span class="num">04</span><h3>固定行情快照</h3><p>当前两个 Adapter 只读取固定日期 Mock JSON；来源差异过大或无数据会阻断核价，不猜 endpoint、字段或价格。</p></article>
+        <article class="number-card"><span class="num">05</span><h3>Decimal 核价</h3><p>材料、加工、模具摊销、二次加工、包装和运输统一用 Decimal 与明确舍入规则，保留利用率来源和规则版本。</p></article>
+        <article class="number-card"><span class="num">06</span><h3>异常与 Excel 报告</h3><p>对供应商报价和估算成本生成 warning / critical 异常，保存运行、快照、代码版本和审计记录，最后输出 Excel。</p></article>
+      </div>
+    </section>
+
+    <section class="case-section container" id="architecture">
+      <div class="section-heading"><span class="section-label">Approval-gated Lifecycle</span><h2>一次核价为什么不能被一句“跳过审核”加速</h2></div>
+      <div class="flow">
+        <article class="flow-step"><span>01</span><h3>Prepare Job</h3><p>复制并 Hash 文件，解析结构化内容，标记待视觉处理页面。</p></article>
+        <article class="flow-step"><span>02</span><h3>Build Draft</h3><p>合并结构化与视觉候选，检测缺失、冲突、低置信度和可疑内容。</p></article>
+        <article class="flow-step"><span>03</span><h3>Human Gate</h3><p>采购人员修正阻断问题并明确批准，生成不可变 BOM 版本。</p></article>
+        <article class="flow-step"><span>04</span><h3>Price Snapshot</h3><p>获取固定日期行情并校验口径；异常来源阻断后续计算。</p></article>
+        <article class="flow-step"><span>05</span><h3>Report</h3><p>运行规则化核价和异常检测，输出可解释结果与 Excel 附件。</p></article>
+      </div>
+    </section>
+
+    <section class="case-section container">
+      <div class="section-heading"><span class="section-label">Security Model</span><h2>文档是业务输入，也是攻击面</h2></div>
+      <div class="decision-list">
+        <article class="decision"><span>1</span><div><h3>文档文字只作为证据，不能成为系统指令</h3><p>英文和中文的“忽略规则”“调用工具”“批准供应商”“读取密钥”等内容会被标记为可疑，但绝不会被执行。</p></div></article>
+        <article class="decision"><span>2</span><div><h3>视觉候选永远不是正式 BOM</h3><p>Hermes 视觉结果必须进入 Pydantic Schema、来源证据、冲突检查和人工批准状态；Python 状态机拒绝越级调用。</p></div></article>
+        <article class="decision"><span>3</span><div><h3>真实行情接入宁可失败，也不猜第三方 API</h3><p>真实生意社 / 隆众 Adapter 当前是空骨架；没有正式文档、鉴权、字段字典和授权时抛出未配置错误。</p></div></article>
+      </div>
+    </section>
+
+    <section class="case-section container">
+      <div class="evidence">
+        <div><span class="section-label">Reproducible Evidence</span><h2>Mock 链路可以完整跑通，也明确标注为 Mock</h2><p>本次从公开仓库临时检出后生成 Demo 文件，27 项测试全部通过；本地 Demo 完成 Job、Draft、BOM、Snapshot、Pricing Run 与 Excel 报告，结果包含 1 个 critical、2 个 warning，并返回“模拟数据，仅用于流程验证”。</p></div>
+        <pre>uv sync
+uv run python scripts/create_demo_files.py
+uv run pytest -q
+uv run python scripts/run_local_demo.py
+uv run python scripts/mcp_smoke_test.py
+uv run python scripts/run_evals.py</pre>
+      </div>
+    </section>
+
+    <section class="case-section container">
+      <div class="boundary-grid">
+        <article class="boundary good"><span class="state">Current Fit</span><h3>当前适合</h3><ul><li>验证 Telegram / Hermes 与企业工具的编排边界。</li><li>演示人机协作的 BOM 审核、冻结与核价流程。</li><li>用固定 Mock 快照评估 Decimal 计算、异常规则和报告链路。</li></ul></article>
+        <article class="boundary caution"><span class="state">Honest Boundaries</span><h3>仍需明确</h3><ul><li>Mock 行情不是实时市场数据，也不构成价格承诺。</li><li>系统不自动定点供应商，最低价仍需采购负责人复核。</li><li>真实行情 Adapter 尚未实现，必须取得正式 API 与合规授权。</li><li>临时检出需显式设置 <code>PROCUREMENT_ROOT</code>，完整测试前需先生成 Demo 文件。</li></ul></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="case-footer"><div class="container"><a href="knowledge-rag.html">← 上一个案例：Knowledge RAG</a><a href="../index.html#projects">返回全部项目 ↑</a></div></footer>
+</body>
+</html>
