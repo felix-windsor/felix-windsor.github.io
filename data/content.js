@@ -64,12 +64,14 @@ window.PORTFOLIO_DATA = {
       code: "https://github.com/felix-windsor/hermes-procurement-pricing-mcp"
     },
     {
-      title: "无损视频分割工具",
-      description: "面向 Telegram 普通用户的实用工具，基于 FFmpeg 将大视频无损切分为 2GB 以下片段。",
-      category: "tool",
-      status: "可用工具",
-      stack: ["Python", "FFmpeg", "CLI"],
-      code: "https://github.com/felix-windsor/video_split-below-2-GB_tools"
+      title: "Hermes Agent Observability",
+      description: "面向通用 Agent 运行的轻量可观测看板，用 Trace 串联 LLM、工具与 Skill 调用，提供失败归因、高频 Skill 分析、本地事件存储及可导出运行证据。",
+      category: "agent",
+      status: "本地可运行",
+      stack: ["Python", "FastAPI", "SQLite + JSONL", "Trace Analytics"],
+      image: "assets/projects/hermes-agent-observability-dashboard.png",
+      imageAlt: "Hermes Agent 观测看板",
+      code: "https://github.com/felix-windsor/hermes-agent-observability-private"
     }
   ]
 };

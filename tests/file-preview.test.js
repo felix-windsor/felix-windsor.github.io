@@ -50,6 +50,9 @@ assert.match(projectGrid.innerHTML, /projects\/knowledge-rag\.html/);
 assert.match(projectGrid.innerHTML, /projects\/procurement-pricing\.html/);
 assert.match(projectGrid.innerHTML, /knowledge-rag-dashboard\.png/);
 assert.match(projectGrid.innerHTML, /procurement-workflow\.svg/);
+assert.match(projectGrid.innerHTML, /Hermes Agent Observability/);
+assert.match(projectGrid.innerHTML, /hermes-agent-observability-dashboard\.png/);
+assert.doesNotMatch(projectGrid.innerHTML, /无损视频分割工具/);
 assert.match(projectGrid.innerHTML, /案例详情/);
 assert.ok(
   projectGrid.innerHTML.indexOf("ModelGate") < projectGrid.innerHTML.indexOf("FlowOps"),
